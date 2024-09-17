@@ -1,9 +1,13 @@
 // Caio Salvador Noboa - 2201926
 
-#include "Element.h"
+#include "Classes.h"
 
 #ifndef ELEMENT_H
 #define ELEMENT_H
+
+Element::Element()
+{
+}
 
 Element::Element(EnumElementType newElementType, std::string newName, int newWeight, int newPower)
 {

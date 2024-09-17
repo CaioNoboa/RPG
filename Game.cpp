@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <string>
-#include "Game.h"
+#include "Classes.h"
 
 #ifndef GAME_H
 #define GAME_H

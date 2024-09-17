@@ -4,7 +4,7 @@
   g++ driver.cpp Backpack.cpp Belt.cpp Character.cpp Element.cpp Game.cpp Belt.cpp Enemy.cpp -o teste.exe
 */
 
-#include "Game.h"
+#include "Classes.h"
 #include <iomanip>
 
 int main()

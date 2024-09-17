@@ -1,6 +1,6 @@
 // Caio Salvador Noboa - 2201926
 
-#include "Character.h"
+#include "Classes.h"
 
 #ifndef CHARACTER_H
 #define CHARACTER_H

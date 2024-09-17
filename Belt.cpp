@@ -1,5 +1,3 @@
-#include "Belt.h"
-
 // Caio Salvador Noboa - 2201926
 
 // std::cout << std::setiosflags(std::ios::left)
@@ -7,6 +5,8 @@
 //      << std::setw(30) << c.nome
 //      << std::setw(10) << std::setprecision(2) << std::resetiosflags(std::ios::left)
 //      << std::setiosflags(std::ios::fixed | std::ios::showpoint) << c.saldo << '\n';
+
+#include "Classes.h"
 
 #ifndef BELT_H
 #define BELT_H

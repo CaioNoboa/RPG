@@ -1,5 +1,6 @@
-#include "Enemy.h"
 // Caio Salvador Noboa - 2201926
+
+#include "Classes.h"
 
 #ifndef ENEMY_H
 #define ENEMY_H
@@ -11,12 +12,12 @@ Enemy::Enemy(std::string newName, int newHealthPoints, int newPower)
   power = newPower;
 }
 
-void Enemy::GetEnemy(EnumDifficultyLevel difficultyLevel, Enemy &enemy, bool boss = false)
+void Enemy::GetEnemy(EnumDifficultyLevel difficultyLevel, Enemy &enemy, bool boss)
 {
-  enemy = sortEnemy(difficultyLevel);
+  enemy = sortEnemy(difficultyLevel, boss);
 }
 
-Enemy Enemy::sortEnemy(EnumDifficultyLevel difficultyLevel, bool boss = false)
+Enemy Enemy::sortEnemy(EnumDifficultyLevel difficultyLevel, bool boss)
 {
   bool hardMode = (difficultyLevel == EnumDifficultyLevel::HIGH);
 
