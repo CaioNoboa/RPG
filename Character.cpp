@@ -109,4 +109,9 @@ void Character::UseElement(Element &element)
   }
 }
 
+bool Character::IsOurHeroAlive()
+{
+  return (healthPoints > 0);
+}
+
 #endif

@@ -5,6 +5,10 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+Enemy::Enemy()
+{
+}
+
 Enemy::Enemy(std::string newName, int newHealthPoints, int newPower)
 {
   name = newName;
@@ -15,6 +19,11 @@ Enemy::Enemy(std::string newName, int newHealthPoints, int newPower)
 void Enemy::GetEnemy(EnumDifficultyLevel difficultyLevel, Enemy &enemy, bool boss)
 {
   enemy = SortEnemy(difficultyLevel, boss);
+}
+
+bool Enemy::IsEnemyAlive()
+{
+  return (healthPoints > 0);
 }
 
 Enemy Enemy::SortEnemy(EnumDifficultyLevel difficultyLevel, bool boss)

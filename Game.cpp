@@ -15,19 +15,13 @@ void Game::Start()
   SetCharacterName();
 
   for (int i = 0; i < 3; i++)
-  {
     PlayInitialLevels();
-  }
 
   for (int i = 0; i < 3; i++)
-  {
     PlayMiddleLevels();
-  }
 
   for (int i = 0; i < 3; i++)
-  {
     PlayFinalLevels();
-  }
 
   PlayBossLevel();
 }
@@ -85,7 +79,7 @@ void Game::PlayMiddleLevels()
   else if (chanceOfGettingNewElementOrAtLeastNotFacingEnemy >= 50)
     EmptySQM();
   else
-    KillOrBeKilled();
+    KillOrBeKilled(false);
 }
 
 void Game::PlayFinalLevels()
@@ -98,19 +92,26 @@ void Game::PlayFinalLevels()
   else if (chanceOfGettingNewElementOrAtLeastNotFacingEnemy >= 70)
     EmptySQM();
   else
-    KillOrBeKilled();
+    KillOrBeKilled(false);
 }
 
 void Game::PlayBossLevel()
 {
-  /*
-    Tem inimigo
-  */
+  KillOrBeKilled(true);
 }
 
-void Game::KillOrBeKilled()
+void Game::KillOrBeKilled(bool boss)
 {
-  // Fazer um personagem inimigo
+  Enemy enemy;
+  enemy.GetEnemy(difficultyLevel, enemy, boss);
+
+  while (enemy.IsEnemyAlive() && character.IsOurHeroAlive())
+  {
+    MainCharacterTurn();
+
+    if (enemy.IsEnemyAlive() && character.IsOurHeroAlive())
+      EnemyTurn();
+  }
 
   // while os dois personagens continuam vivos
   // Fica alternando turnos

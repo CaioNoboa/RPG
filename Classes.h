@@ -93,6 +93,7 @@ public:
   void GetNewElement(EnumDifficultyLevel difficultyLevel);
   void StoreElement(Element element);
   void UseElement(Element &element);
+  bool IsOurHeroAlive();
 
 private:
   std::string name;
@@ -104,8 +105,10 @@ private:
 class Enemy
 {
 public:
+  Enemy();
   Enemy(std::string newName, int newHealthPoints, int newPower);
   void GetEnemy(EnumDifficultyLevel difficultyLevel, Enemy &enemy, bool boss);
+  bool IsEnemyAlive();
 
 private:
   std::string name;
@@ -136,7 +139,7 @@ private:
   void PlayMiddleLevels();
   void PlayFinalLevels();
   void PlayBossLevel();
-  void KillOrBeKilled();
+  void KillOrBeKilled(bool boss);
   void MainCharacterTurn();
   void EnemyTurn();
   void EmptySQM();
