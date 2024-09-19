@@ -14,10 +14,10 @@ Enemy::Enemy(std::string newName, int newHealthPoints, int newPower)
 
 void Enemy::GetEnemy(EnumDifficultyLevel difficultyLevel, Enemy &enemy, bool boss)
 {
-  enemy = sortEnemy(difficultyLevel, boss);
+  enemy = SortEnemy(difficultyLevel, boss);
 }
 
-Enemy Enemy::sortEnemy(EnumDifficultyLevel difficultyLevel, bool boss)
+Enemy Enemy::SortEnemy(EnumDifficultyLevel difficultyLevel, bool boss)
 {
   bool hardMode = (difficultyLevel == EnumDifficultyLevel::HIGH);
 

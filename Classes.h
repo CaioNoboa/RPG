@@ -12,14 +12,13 @@
 enum EnumDifficultyLevel
 {
   LOW = 1,
-  MEDIUM = 2,
-  HIGH = 3
+  HIGH = 2
 };
 
 enum EnumElementType
 {
-  weapons = 1,
-  potions = 2,
+  WEAPONS = 1,
+  POTIONS = 2,
 };
 
 class Element
@@ -112,7 +111,7 @@ private:
   std::string name;
   int healthPoints;
   int power;
-  Enemy sortEnemy(EnumDifficultyLevel difficultyLevel, bool boss);
+  Enemy SortEnemy(EnumDifficultyLevel difficultyLevel, bool boss);
 };
 
 class Game
@@ -125,19 +124,20 @@ class Game
   */
 
 public:
-  void start();
+  void Start();
 
 private:
   Character character;
   EnumDifficultyLevel difficultyLevel;
 
-  void setDifficultyLevel();
-  void setCharacterName();
-  void playInitialLevels();
-  void playMiddleLevels();
-  void playFinalLevels();
-  void playBossLevel();
-  void killOrBeKilled();
-  void mainCharacterTurn();
-  void enemyTurn();
+  void SetDifficultyLevel();
+  void SetCharacterName();
+  void PlayInitialLevels();
+  void PlayMiddleLevels();
+  void PlayFinalLevels();
+  void PlayBossLevel();
+  void KillOrBeKilled();
+  void MainCharacterTurn();
+  void EnemyTurn();
+  void EmptySQM();
 };

@@ -26,7 +26,7 @@ void Element::PrintElement()
 {
   std::cout << "Nome: " << name << std::endl;
 
-  if (elementType == EnumElementType::potions)
+  if (elementType == EnumElementType::POTIONS)
     std::cout << "Poder de cura: " << power << std::endl;
   else
     std::cout << "Poder de ataque: " << power << std::endl;
@@ -39,11 +39,11 @@ Element Element::sortElement(EnumDifficultyLevel difficultyLevel)
   bool hardMode = (difficultyLevel == EnumDifficultyLevel::HIGH);
 
   Element elementList[5] = {
-      Element(EnumElementType::potions, "Element1", hardMode ? 5 : 10, hardMode ? 5 : 10),
-      Element(EnumElementType::potions, "Element1", hardMode ? 5 : 10, hardMode ? 5 : 10),
-      Element(EnumElementType::potions, "Element1", hardMode ? 5 : 10, hardMode ? 5 : 10),
-      Element(EnumElementType::potions, "Element1", hardMode ? 5 : 10, hardMode ? 5 : 10),
-      Element(EnumElementType::potions, "Element1", hardMode ? 5 : 10, hardMode ? 5 : 10),
+      Element(EnumElementType::POTIONS, "Element1", hardMode ? 5 : 10, hardMode ? 5 : 10),
+      Element(EnumElementType::POTIONS, "Element1", hardMode ? 5 : 10, hardMode ? 5 : 10),
+      Element(EnumElementType::POTIONS, "Element1", hardMode ? 5 : 10, hardMode ? 5 : 10),
+      Element(EnumElementType::POTIONS, "Element1", hardMode ? 5 : 10, hardMode ? 5 : 10),
+      Element(EnumElementType::POTIONS, "Element1", hardMode ? 5 : 10, hardMode ? 5 : 10),
   };
 
   srand(time(0));

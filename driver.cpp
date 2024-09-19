@@ -10,7 +10,7 @@
 int main()
 {
   Game game;
-  game.start();
+  game.Start();
 
   // std::cout << std::setiosflags(std::ios::left)
   //           << std::setw(15) << "element.name"

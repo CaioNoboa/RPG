@@ -7,38 +7,37 @@
 #ifndef GAME_H
 #define GAME_H
 
-void Game::start()
+void Game::Start()
 {
   std::cout << "Inicio do jogo" << std::endl;
   std::cout << "Vamos iniciar setando a dificuldade do jogo:" << std::endl;
-  setDifficultyLevel();
-  setCharacterName();
+  SetDifficultyLevel();
+  SetCharacterName();
 
   for (int i = 0; i < 3; i++)
   {
-    playInitialLevels();
+    PlayInitialLevels();
   }
 
   for (int i = 0; i < 3; i++)
   {
-    playMiddleLevels();
+    PlayMiddleLevels();
   }
 
   for (int i = 0; i < 3; i++)
   {
-    playFinalLevels();
+    PlayFinalLevels();
   }
 
-  playBossLevel();
+  PlayBossLevel();
 }
 
-void Game::setDifficultyLevel()
+void Game::SetDifficultyLevel()
 {
   int entry;
   std::cout << "Escolha o nivel de dificuldade:" << std::endl;
   std::cout << "Digite 1 para escolher nivel facil;" << std::endl;
-  std::cout << "Digite 2 para escolher nivel medio;" << std::endl;
-  std::cout << "Digite 3 para escolher nivel dificil;" << std::endl;
+  std::cout << "Digite 2 para escolher nivel dificil;" << std::endl;
   std::cin >> entry;
 
   switch (entry)
@@ -46,19 +45,16 @@ void Game::setDifficultyLevel()
   case static_cast<int>(EnumDifficultyLevel::LOW):
     difficultyLevel = EnumDifficultyLevel::LOW;
     break;
-  case static_cast<int>(EnumDifficultyLevel::MEDIUM):
-    difficultyLevel = EnumDifficultyLevel::MEDIUM;
-    break;
   case static_cast<int>(EnumDifficultyLevel::HIGH):
     difficultyLevel = EnumDifficultyLevel::HIGH;
     break;
   default:
-    setDifficultyLevel();
+    SetDifficultyLevel();
     break;
   }
 }
 
-void Game::setCharacterName()
+void Game::SetCharacterName()
 {
   std::string name = "";
   std::cout << "Escolha o nome do personagem: ";
@@ -68,89 +64,59 @@ void Game::setCharacterName()
   character.SetName(name);
 }
 
-void Game::playInitialLevels()
+void Game::PlayInitialLevels()
 {
-  /*
-    Não tem nada
-    Ou tem elemento
-  */
-
-  // Faço um sorteio para ver se encontrará algo ou nao
   srand(time(0));
   int chanceOfGettingNewElement = 0 + (rand() % 101);
+
   if (chanceOfGettingNewElement >= 30)
-  {
     character.GetNewElement(difficultyLevel);
-  }
   else
-  {
-    // Vazio
-  }
+    EmptySQM();
 }
 
-void Game::playMiddleLevels()
+void Game::PlayMiddleLevels()
 {
-  /*
-    Não tem nada
-    Ou tem elemento
-    Ou tem inimigo
-  */
-
   srand(time(0));
-  int chanceOfGettingNewElement = 0 + (rand() % 101);
-  if (chanceOfGettingNewElement >= 70)
-  {
+  int chanceOfGettingNewElementOrAtLeastNotFacingEnemy = 0 + (rand() % 101);
+
+  if (chanceOfGettingNewElementOrAtLeastNotFacingEnemy >= 70)
     character.GetNewElement(difficultyLevel);
-  }
-  else if (chanceOfGettingNewElement >= 50)
-  {
-    // Vazio
-  } else {
-    // Inimigo
-    killOrBeKilled();
-  }
-
-
-  // Element newElement = element.sortElement(difficultyLevel);
+  else if (chanceOfGettingNewElementOrAtLeastNotFacingEnemy >= 50)
+    EmptySQM();
+  else
+    KillOrBeKilled();
 }
 
-void Game::playFinalLevels()
+void Game::PlayFinalLevels()
 {
-  /*
-    Não tem nada
-    Ou tem elemento
-    Ou tem inimigo
-  */
   srand(time(0));
-  int chanceOfGettingNewElement = 0 + (rand() % 101);
-  if (chanceOfGettingNewElement >= 80)
-  {
-    character.GetNewElement(difficultyLevel);
-  }
-  else if (chanceOfGettingNewElement >= 70)
-  {
-    // Vazio
-  } else {
-    // Inimigo
-  }}
+  int chanceOfGettingNewElementOrAtLeastNotFacingEnemy = 0 + (rand() % 101);
 
-void Game::playBossLevel()
+  if (chanceOfGettingNewElementOrAtLeastNotFacingEnemy >= 80)
+    character.GetNewElement(difficultyLevel);
+  else if (chanceOfGettingNewElementOrAtLeastNotFacingEnemy >= 70)
+    EmptySQM();
+  else
+    KillOrBeKilled();
+}
+
+void Game::PlayBossLevel()
 {
   /*
     Tem inimigo
   */
 }
 
-void Game::killOrBeKilled()
+void Game::KillOrBeKilled()
 {
   // Fazer um personagem inimigo
 
   // while os dois personagens continuam vivos
   // Fica alternando turnos
-
 }
 
-void Game::mainCharacterTurn()
+void Game::MainCharacterTurn()
 {
   int entry;
   std::cout << "Digite o que gostaria de fazer: " << std::endl;
@@ -164,8 +130,16 @@ void Game::mainCharacterTurn()
   }
 }
 
-void Game::enemyTurn()
+void Game::EnemyTurn()
 {
+}
+
+void Game::EmptySQM()
+{
+  std::cout << "Nao ha nada por aqui..." << std::endl;
+  std::cout << "Mas voce pode vericar o que possui no cinto e mochila, se curar se necessario..." << std::endl;
+
+  // TODO
 }
 
 #endif
