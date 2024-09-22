@@ -17,20 +17,21 @@ bool Backpack::Empty()
   return top == NULL;
 }
 
-void Backpack::Push(Element element)
+bool Backpack::Push(Element element)
 {
   BackpackNode *pointer = new BackpackNode;
 
   if (pointer == NULL)
   {
     std::cout << "Sem capacidade de armazenamento!" << std::endl;
-    abort();
+    return false;
   }
 
   pointer->Element = element;
   pointer->NextNode = top;
   top = pointer;
   count++;
+  return true;
 }
 
 void Backpack::Pop(Element &element)

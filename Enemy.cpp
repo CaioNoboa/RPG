@@ -26,6 +26,14 @@ bool Enemy::IsEnemyAlive()
   return (healthPoints > 0);
 }
 
+void Enemy::PrintEnemyInformations()
+{
+  std::cout << "Dados do inimigo" << std::endl;
+  std::cout << "Nome: " << name << std::endl;
+  std::cout << "Pontos de vida: " << healthPoints << std::endl;
+  std::cout << "Pontos de ataque: " << power << std::endl;
+}
+
 Enemy Enemy::SortEnemy(EnumDifficultyLevel difficultyLevel, bool boss)
 {
   bool hardMode = (difficultyLevel == EnumDifficultyLevel::HIGH);

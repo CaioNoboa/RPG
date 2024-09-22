@@ -2,12 +2,9 @@
 
 #include <iostream>
 
-// class Backpack;
-// class Belt;
-// class Character;
-// class Element;
-// class Enemy;
-// class Game;
+const int MaxBeltItems = 5;
+const int MaxBeltWeight = 100;
+const int MaxHealthPoints = 100;
 
 enum EnumDifficultyLevel
 {
@@ -43,7 +40,7 @@ public:
   Backpack();
   ~Backpack();
   bool Empty();
-  void Push(Element element);
+  bool Push(Element element);
   void Pop(Element &element);
   int Size();
   void Clear();
@@ -61,16 +58,14 @@ private:
   int count;
 };
 
-const int MaxBelt = 5;
-
 class Belt
 {
 public:
   Belt();
   ~Belt();
-  bool Full();
+  bool Full(Element element);
   bool Empty();
-  void Insert(Element element);
+  bool Insert(Element element);
   void Delete(Element &element);
   void Retrieve(Element &element);
   void Replace(Element element);
@@ -81,7 +76,8 @@ public:
 
 private:
   int count;
-  Element BeltElements[MaxBelt + 1];
+  int weightCount;
+  Element BeltElements[MaxBeltItems + 1];
 };
 
 class Character
@@ -92,8 +88,9 @@ public:
   void GetName(std::string &characterName);
   void GetNewElement(EnumDifficultyLevel difficultyLevel);
   void StoreElement(Element element);
-  void UseElement(Element &element);
+  bool UseElement(Element &element);
   bool IsOurHeroAlive();
+  void PrintHeroInformations();
 
 private:
   std::string name;
@@ -109,6 +106,7 @@ public:
   Enemy(std::string newName, int newHealthPoints, int newPower);
   void GetEnemy(EnumDifficultyLevel difficultyLevel, Enemy &enemy, bool boss);
   bool IsEnemyAlive();
+  void PrintEnemyInformations();
 
 private:
   std::string name;
@@ -140,7 +138,7 @@ private:
   void PlayFinalLevels();
   void PlayBossLevel();
   void KillOrBeKilled(bool boss);
-  void MainCharacterTurn();
-  void EnemyTurn();
+  void MainCharacterTurn(Enemy &enemy);
+  void EnemyTurn(Enemy &enemy);
   void EmptySQM();
 };

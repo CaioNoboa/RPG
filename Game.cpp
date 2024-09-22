@@ -13,16 +13,29 @@ void Game::Start()
   std::cout << "Vamos iniciar setando a dificuldade do jogo:" << std::endl;
   SetDifficultyLevel();
   SetCharacterName();
+  int numberOfInitialLevels = 3;
+  int numberOfMiddleLevels = 3;
+  int numberOfFinalLevels = 3;
 
-  for (int i = 0; i < 3; i++)
+  for (int i = 1; i <= numberOfInitialLevels; i++)
+  {
+    std::cout << "Fase I " << i << '!' << std::endl;
     PlayInitialLevels();
+  }
 
-  for (int i = 0; i < 3; i++)
+  for (int i = 1; i <= numberOfMiddleLevels; i++)
+  {
+    std::cout << "Fase M " << (i + numberOfInitialLevels) << '!' << std::endl;
     PlayMiddleLevels();
+  }
 
-  for (int i = 0; i < 3; i++)
+  for (int i = 1; i <= numberOfFinalLevels; i++)
+  {
+    std::cout << "Fase F " << (i + numberOfInitialLevels + numberOfMiddleLevels) << '!' << std::endl;
     PlayFinalLevels();
+  }
 
+  std::cout << "Parabens, voce chegou a ultima fase!" << std::endl;
   PlayBossLevel();
 }
 
@@ -107,40 +120,55 @@ void Game::KillOrBeKilled(bool boss)
 
   while (enemy.IsEnemyAlive() && character.IsOurHeroAlive())
   {
-    MainCharacterTurn();
+    character.PrintHeroInformations();
+    enemy.PrintEnemyInformations();
+    MainCharacterTurn(enemy);
 
     if (enemy.IsEnemyAlive() && character.IsOurHeroAlive())
-      EnemyTurn();
+      EnemyTurn(enemy);
   }
-
-  // while os dois personagens continuam vivos
-  // Fica alternando turnos
 }
 
-void Game::MainCharacterTurn()
+void Game::MainCharacterTurn(Enemy &enemy)
 {
-  int entry;
-  std::cout << "Digite o que gostaria de fazer: " << std::endl;
-  std::cout << "Digite 1 para atacar;" << std::endl;
-  std::cout << "Digite 2 para usar pocao;" << std::endl;
-  std::cout << "Digite 3 para ;" << std::endl;
-  std::cin >> entry;
+  Element element;
 
-  switch (entry)
+  std::cout << "Verifique e use seus itens para atacar o inimigo ou se curar!" << std::endl;
+  character.UseElement(element);
+
+  if (element.elementType == EnumElementType::WEAPONS)
   {
+    // TODO
   }
 }
 
-void Game::EnemyTurn()
+void Game::EnemyTurn(Enemy &enemy)
 {
+  // TODO
 }
 
 void Game::EmptySQM()
 {
-  std::cout << "Nao ha nada por aqui..." << std::endl;
-  std::cout << "Mas voce pode vericar o que possui no cinto e mochila, se curar se necessario..." << std::endl;
+  Element element;
+  bool userChoseElement = false;
+  int entry;
 
-  // TODO
+  std::cout << "Nao ha nada por aqui..." << std::endl;
+  std::cout << "Mas voce pode vericar o que possui no cinto e mochila, utilizar algum elemento." << std::endl;
+  std::cout << "Escolha o que gostaria de fazer:" << std::endl;
+  std::cout << "Digite 1 para verificar e usar seus itens;" << std::endl;
+  std::cout << "Digite 2 para nao fazer nada;" << std::endl;
+  std::cin >> entry;
+
+  switch (entry)
+  {
+  case 1:
+    character.UseElement(element);
+    break;
+  default:
+    return;
+    break;
+  }
 }
 
 #endif

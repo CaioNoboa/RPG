@@ -14,17 +14,17 @@
 Belt::Belt()
 {
     count = 0;
+    weightCount = 0;
 }
 
 Belt::~Belt()
-
 {
     Clear();
 }
 
-bool Belt::Full()
+bool Belt::Full(Element element)
 {
-    return (count == MaxBelt);
+    return ((count == MaxBeltItems) || ((element.weight + weightCount) > MaxBeltWeight));
 }
 
 bool Belt::Empty()
@@ -32,20 +32,27 @@ bool Belt::Empty()
     return (count == 0);
 }
 
-void Belt::Insert(Element element)
+bool Belt::Insert(Element element)
 {
     int position = GetElementPosition();
 
-    if (Full())
+    if (Full(element))
     {
-        std::cout << "Lista Cheia" << std::endl;
-        return;
+        std::cout << "O cinto está cheio!" << std::endl;
+
+        /*
+            TODO
+            User pode escolher entre voltar (return false) ou prosseguir com replace
+            Precisará fazer replace retornar bool tmbm        
+        */
+
+        return false;
     }
 
     if ((position < 1) || (position > (count + 1)))
     {
         std::cout << "Posição inválida" << std::endl;
-        return;
+        return false;
     }
 
     for (int i = count; i >= position; i--)
@@ -54,7 +61,9 @@ void Belt::Insert(Element element)
     }
 
     BeltElements[position] = element;
+    weightCount += element.weight;
     count++;
+    return true;
 }
 
 void Belt::Delete(Element &element)
@@ -74,6 +83,7 @@ void Belt::Delete(Element &element)
     }
 
     element = BeltElements[position];
+    weightCount -= element.weight;
     count--;
 
     for (int i = position; i < count; i++)
@@ -116,6 +126,7 @@ int Belt::Size()
 void Belt::Clear()
 {
     count = 0;
+    weightCount = 0;
 }
 
 void Belt::ListBeltElements()
