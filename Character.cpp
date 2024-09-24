@@ -24,11 +24,19 @@ void Character::GetName(std::string &characterName)
 void Character::GetNewElement(EnumDifficultyLevel difficultyLevel)
 {
   Element newElement;
+  int entry;
+
   newElement.GetElement(difficultyLevel, newElement);
   std::cout << "Voce encontrou um novo elemento!" << std::endl;
   newElement.PrintElement();
-  std::cout << "Agora precisa guardar este elemento!" << std::endl;
-  StoreElement(newElement);
+  std::cout << "-------------------" << std::endl;
+  std::cout << "Voce pode guardar este elemento ou apenas ignora-lo." << std::endl;
+  std::cout << "Digite 1 para guardar este elemento;" << std::endl;
+  std::cout << "Digite 2 para apenas ignora-lo." << std::endl;
+  std::cin >> entry;
+
+  if (entry == 1)
+    StoreElement(newElement);
 }
 
 void Character::StoreElement(Element element)
@@ -44,11 +52,12 @@ void Character::StoreElement(Element element)
 
   while (!userChoseHowToStore)
   {
+    std::cout << "-------------------" << std::endl;
     std::cout << "Escolha o que gostaria de fazer:" << std::endl;
     std::cout << "Digite 1 para listar itens do cinto;" << std::endl;
     std::cout << "Digite 2 para listar item do topo da mochila;" << std::endl;
     std::cout << "Digite 3 para guardar no cinto;" << std::endl;
-    std::cout << "Digite 4 para guardar na mochila;" << std::endl;
+    std::cout << "Digite 4 para guardar na mochila." << std::endl;
     std::cin >> entry;
 
     switch (entry)
@@ -57,9 +66,7 @@ void Character::StoreElement(Element element)
       belt.ListBeltElements();
       break;
     case 2:
-      backpack.Top(topBackpackElement);
-      std::cout << "Elemento topo:" << std::endl;
-      topBackpackElement.PrintElement();
+      backpack.Top(topBackpackElement, true);
       break;
     case 3:
       userChoseHowToStore = belt.Insert(element);
@@ -93,7 +100,7 @@ bool Character::UseElement(Element &element)
     std::cout << "Digite 2 para listar item do topo da mochila;" << std::endl;
     std::cout << "Digite 3 para usar item do cinto;" << std::endl;
     std::cout << "Digite 4 para usar item da mochila;" << std::endl;
-    std::cout << "Digite 5 para retornar." << std::endl;
+    std::cout << "Digite 5 para nao fazer nada." << std::endl;
     std::cin >> entry;
 
     switch (entry)
@@ -102,9 +109,7 @@ bool Character::UseElement(Element &element)
       belt.ListBeltElements();
       break;
     case 2:
-      backpack.Top(topBackpackElement);
-      std::cout << "Elemento topo: " << std::endl;
-      topBackpackElement.PrintElement();
+      backpack.Top(topBackpackElement, true);
       break;
     case 3:
       belt.Delete(element);
@@ -114,11 +119,8 @@ bool Character::UseElement(Element &element)
       backpack.Pop(element);
       userChoseElement = true;
       break;
-    case 5:
-      return false;
-      break;
     default:
-      std::cout << "Valor invalido, vamos tentar novamente." << std::endl;
+      return false;
       break;
     }
   }
@@ -143,22 +145,34 @@ bool Character::IsOurHeroAlive()
 
 void Character::PrintHeroInformations()
 {
+  std::cout << "-------------------" << std::endl;
   std::cout << "Dados do nosso heroi" << std::endl;
   std::cout << "Nome: " << name << std::endl;
   std::cout << "Pontos de vida: " << healthPoints << std::endl;
+  std::cout << "-------------------" << std::endl;
 }
 
 void Character::OurHeroGotAttacked(Enemy enemy)
 {
+  std::cout << "Voce foi atacado!" << std::endl;
   healthPoints -= enemy.GetEnemyPower();
+}
 
-  if (!IsOurHeroAlive())
+void Character::PrintBasicInformations()
+{
+  Element element;
+  std::string topBackpackElementName = "Mochila vazia";
+
+  if (!backpack.Empty())
   {
-    std::cout << "Opa, voce nao sobreviveu ao desafio..." << std::endl;
-    std::cout << "Boa sorte da proxima vez!" << std::endl;
-    std::cout << "GAME OVER" << std::endl;
-    abort();
+    backpack.Top(element, false);
+    topBackpackElementName = element.GetElementName();
   }
+  std::cout << "-------------------" << std::endl;
+  std::cout << "Conteudo total do cinto: " << belt.Size() << ". Peso: " << belt.Weight() << '/' << MaxBeltWeight << '.' << std::endl;
+  std::cout << "Elemento do topo da mochila: " << topBackpackElementName << '.' << std::endl;
+  std::cout << "Pontos de vida de " << name << ": " << healthPoints << '.' << std::endl;
+  std::cout << "-------------------" << std::endl;
 }
 
 #endif

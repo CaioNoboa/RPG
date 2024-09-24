@@ -1,0 +1,3 @@
+Jogador qw, na data 24/09/2024, alcançou nivel 3, do total de 10
+Jogador Caio, na data 24/09/2024, alcançou nivel 3, do total de 10
+Jogador Caio, na data 24/09/2024, alcançou nivel 13, do total de 14

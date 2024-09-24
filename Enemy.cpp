@@ -32,6 +32,7 @@ void Enemy::PrintEnemyInformations()
   std::cout << "Nome: " << name << std::endl;
   std::cout << "Pontos de vida: " << healthPoints << std::endl;
   std::cout << "Pontos de ataque: " << power << std::endl;
+  std::cout << "-------------------" << std::endl;
 }
 
 void Enemy::EnemyGotAttacked(Element element)
@@ -52,20 +53,22 @@ Enemy Enemy::SortEnemy(EnumDifficultyLevel difficultyLevel, bool boss)
   bool hardMode = (difficultyLevel == EnumDifficultyLevel::HIGH);
 
   if (boss)
-  {
-    return Enemy("Boss", hardMode ? 100 : 50, hardMode ? 20 : 10);
-  }
+    return Enemy("Boss", 200, hardMode ? 30 : 20);
 
-  Enemy enemiesList[5] = {
-      Enemy("1", hardMode ? 100 : 50, hardMode ? 20 : 10),
-      Enemy("2", hardMode ? 100 : 50, hardMode ? 20 : 10),
-      Enemy("3", hardMode ? 100 : 50, hardMode ? 20 : 10),
-      Enemy("4", hardMode ? 100 : 50, hardMode ? 20 : 10),
-      Enemy("5", hardMode ? 100 : 50, hardMode ? 20 : 10),
+  Enemy enemiesList[9] = {
+      Enemy("Inimigo basico 1", hardMode ? 15 : 10, hardMode ? 10 : 5),
+      Enemy("Inimigo basico 2", hardMode ? 20 : 15, hardMode ? 10 : 5),
+      Enemy("Inimigo basico 3", hardMode ? 25 : 20, hardMode ? 10 : 5),
+      Enemy("Inimigo intermediario 1", hardMode ? 30 : 25, hardMode ? 15 : 10),
+      Enemy("Inimigo intermediario 2", hardMode ? 35 : 30, hardMode ? 15 : 10),
+      Enemy("Inimigo intermediario 3", hardMode ? 40 : 35, hardMode ? 15 : 10),
+      Enemy("Inimigo complexo 1", hardMode ? 45 : 40, hardMode ? 20 : 15),
+      Enemy("Inimigo complexo 2", hardMode ? 50 : 50, hardMode ? 20 : 15),
+      Enemy("Inimigo complexo 3", hardMode ? 70 : 60, hardMode ? 20 : 15),
   };
 
   srand(time(0));
-  int index = 0 + (rand() % 4);
+  int index = 0 + (rand() % 9);
   return enemiesList[index];
 }
 

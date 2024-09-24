@@ -12,6 +12,11 @@ Backpack::Backpack()
   top = NULL;
 };
 
+Backpack::~Backpack()
+{
+  Clear();
+}
+
 bool Backpack::Empty()
 {
   return top == NULL;
@@ -36,17 +41,34 @@ bool Backpack::Push(Element element)
 
 void Backpack::Pop(Element &element)
 {
-  if (Empty())
-  {
-    std::cout << "Pilha ja esta vazia!" << std::endl;
-    abort();
-  }
+  bool userChoseBackpackElement = false;
+  int entry;
 
-  element = top->Element;
-  BackpackNode *pointer = top;
-  top = top->NextNode;
-  delete pointer;
-  count--;
+  while (!userChoseBackpackElement)
+  {
+    if (Empty())
+    {
+      std::cout << "Pilha ja esta vazia!" << std::endl;
+      return;
+    }
+
+    element = top->Element;
+    BackpackNode *pointer = top;
+    top = top->NextNode;
+    delete pointer;
+    count--;
+
+    std::cout << "-------------------" << std::endl;
+    std::cout << "Elemento do topo da mochila:" << std::endl;
+    element.PrintElement();
+    std::cout << "-------------------" << std::endl;
+    std::cout << "Digite 1 para usa-lo;" << std::endl;
+    std::cout << "Digite 2 para descarta-lo e buscar novo elemento na mochila." << std::endl;
+    std::cin >> entry;
+
+    if (entry == 1)
+      userChoseBackpackElement = true;
+  }
 }
 
 int Backpack::Size()
@@ -63,20 +85,23 @@ void Backpack::Clear()
   }
 }
 
-void Backpack::Top(Element &element)
+void Backpack::Top(Element &element, bool print)
 {
+  if (Empty())
+  {
+    std::cout << "Mochila vazia!" << std::endl;
+    return;
+  }
+
   element = top->Element;
 
-  // std::cout << std::setiosflags(std::ios::left)
-  //           << std::setw(10) << element.name
-  //           << std::setw(30) << element.power
-  //           << std::setw(10) << std::setprecision(2) << std::resetiosflags(std::ios::left)
-  //           << std::setiosflags(std::ios::fixed | std::ios::showpoint) << element.weight << '\n';
-}
-
-Backpack::~Backpack()
-{
-  Clear();
+  if (print)
+  {
+    std::cout << "----- MOCHILA -----" << std::endl;
+    std::cout << "Elemento topo: " << std::endl;
+    element.PrintElement();
+    std::cout << "-------------------" << std::endl;
+  }
 }
 
 #endif
