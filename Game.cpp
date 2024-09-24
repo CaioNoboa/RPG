@@ -124,7 +124,7 @@ void Game::KillOrBeKilled(bool boss)
     enemy.PrintEnemyInformations();
     MainCharacterTurn(enemy);
 
-    if (enemy.IsEnemyAlive() && character.IsOurHeroAlive())
+    if (enemy.IsEnemyAlive())
       EnemyTurn(enemy);
   }
 }
@@ -137,14 +137,12 @@ void Game::MainCharacterTurn(Enemy &enemy)
   character.UseElement(element);
 
   if (element.elementType == EnumElementType::WEAPONS)
-  {
-    // TODO
-  }
+    enemy.EnemyGotAttacked(element);
 }
 
-void Game::EnemyTurn(Enemy &enemy)
+void Game::EnemyTurn(Enemy enemy)
 {
-  // TODO
+  character.OurHeroGotAttacked(enemy);
 }
 
 void Game::EmptySQM()

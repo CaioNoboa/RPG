@@ -148,4 +148,17 @@ void Character::PrintHeroInformations()
   std::cout << "Pontos de vida: " << healthPoints << std::endl;
 }
 
+void Character::OurHeroGotAttacked(Enemy enemy)
+{
+  healthPoints -= enemy.GetEnemyPower();
+
+  if (!IsOurHeroAlive())
+  {
+    std::cout << "Opa, voce nao sobreviveu ao desafio..." << std::endl;
+    std::cout << "Boa sorte da proxima vez!" << std::endl;
+    std::cout << "GAME OVER" << std::endl;
+    abort();
+  }
+}
+
 #endif

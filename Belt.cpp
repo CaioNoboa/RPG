@@ -34,20 +34,26 @@ bool Belt::Empty()
 
 bool Belt::Insert(Element element)
 {
-    int position = GetElementPosition();
-
     if (Full(element))
     {
-        std::cout << "O cinto está cheio!" << std::endl;
+        int entry;
+        std::cout << "O cinto está cheio e não possui espaço para o novo elemento!" << std::endl;
+        std::cout << "Digite 1 para verificar seu cinto e substituir um item pelo novo eleemnto;" << std::endl;
+        std::cout << "Digite 2 para retornar." << std::endl;
+        std::cin >> entry;
 
-        /*
-            TODO
-            User pode escolher entre voltar (return false) ou prosseguir com replace
-            Precisará fazer replace retornar bool tmbm        
-        */
-
-        return false;
+        switch (entry)
+        {
+        case 1:
+            return Replace(element);
+            break;
+        default:
+            return false;
+            break;
+        }
     }
+
+    int position = GetElementPosition(false);
 
     if ((position < 1) || (position > (count + 1)))
     {
@@ -68,7 +74,7 @@ bool Belt::Insert(Element element)
 
 void Belt::Delete(Element &element)
 {
-    int position = GetElementPosition();
+    int position = GetElementPosition(false);
 
     if (Empty())
     {
@@ -92,30 +98,31 @@ void Belt::Delete(Element &element)
     }
 }
 
-void Belt::Retrieve(Element &element)
+// void Belt::Retrieve(Element &element)
+// {
+//     int position = GetElementPosition();
+
+//     if (position < 1 || position > count)
+//     {
+//         std::cout << "Posição inválida" << std::endl;
+//         return;
+//     }
+
+//     element = BeltElements[position];
+// }
+
+bool Belt::Replace(Element element)
 {
-    int position = GetElementPosition();
+    int position = GetElementPosition(true);
 
     if (position < 1 || position > count)
     {
         std::cout << "Posição inválida" << std::endl;
-        return;
-    }
-
-    element = BeltElements[position];
-}
-
-void Belt::Replace(Element element)
-{
-    int position = GetElementPosition();
-
-    if (position < 1 || position > count)
-    {
-        std::cout << "Posição inválida" << std::endl;
-        return;
+        return false;
     }
 
     BeltElements[position] = element;
+    return true;
 }
 
 int Belt::Size()
@@ -144,14 +151,19 @@ void Belt::ListBeltElements()
     }
 }
 
-int Belt::GetElementPosition()
+int Belt::GetElementPosition(bool replace)
 {
     int entry = 0;
 
     while (entry < 1 || entry > count)
     {
         ListBeltElements();
-        std::cout << "Informe a posicao do elemento que deseja utilizar: " << std::endl;
+
+        if (replace)
+            std::cout << "Informe a posicao do elemento que deseja substituir: " << std::endl;
+        else
+            std::cout << "Informe a posicao do elemento que deseja utilizar: " << std::endl;
+
         std::cin >> entry;
     }
 

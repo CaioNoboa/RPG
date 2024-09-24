@@ -67,12 +67,12 @@ public:
   bool Empty();
   bool Insert(Element element);
   void Delete(Element &element);
-  void Retrieve(Element &element);
-  void Replace(Element element);
+  // void Retrieve(Element &element);
+  bool Replace(Element element);
   int Size();
   void Clear();
   void ListBeltElements();
-  int GetElementPosition();
+  int GetElementPosition(bool replace);
 
 private:
   int count;
@@ -91,6 +91,7 @@ public:
   bool UseElement(Element &element);
   bool IsOurHeroAlive();
   void PrintHeroInformations();
+  void OurHeroGotAttacked(Enemy enemy);
 
 private:
   std::string name;
@@ -107,6 +108,8 @@ public:
   void GetEnemy(EnumDifficultyLevel difficultyLevel, Enemy &enemy, bool boss);
   bool IsEnemyAlive();
   void PrintEnemyInformations();
+  void EnemyGotAttacked(Element element);
+  int GetEnemyPower();
 
 private:
   std::string name;
@@ -117,20 +120,12 @@ private:
 
 class Game
 {
-  /*
-    Níveis
-    Mapa
-    Elementos
-    Heroi
-  */
-
 public:
   void Start();
 
 private:
   Character character;
   EnumDifficultyLevel difficultyLevel;
-
   void SetDifficultyLevel();
   void SetCharacterName();
   void PlayInitialLevels();
@@ -139,6 +134,6 @@ private:
   void PlayBossLevel();
   void KillOrBeKilled(bool boss);
   void MainCharacterTurn(Enemy &enemy);
-  void EnemyTurn(Enemy &enemy);
+  void EnemyTurn(Enemy enemy);
   void EmptySQM();
 };
