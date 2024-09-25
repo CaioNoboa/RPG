@@ -80,10 +80,12 @@ int Backpack::Size()
 
 void Backpack::Clear()
 {
-  Element element;
   while (!Empty())
   {
-    Pop(element);
+    BackpackNode *pointer = top;
+    top = top->NextNode;
+    delete pointer;
+    count--;
   }
 }
 

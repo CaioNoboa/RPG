@@ -7,6 +7,9 @@
 
 Enemy::Enemy()
 {
+  name = "";
+  healthPoints = 0;
+  power = 0;
 }
 
 Enemy::Enemy(std::string newName, int newHealthPoints, int newPower)
