@@ -39,7 +39,7 @@ bool Backpack::Push(Element element)
   return true;
 }
 
-void Backpack::Pop(Element &element)
+bool Backpack::Pop(Element &element)
 {
   bool userChoseBackpackElement = false;
   int entry;
@@ -48,8 +48,8 @@ void Backpack::Pop(Element &element)
   {
     if (Empty())
     {
-      std::cout << "Pilha ja esta vazia!" << std::endl;
-      return;
+      std::cout << "Mochila vazia!" << std::endl;
+      return false;
     }
 
     element = top->Element;
@@ -69,6 +69,8 @@ void Backpack::Pop(Element &element)
     if (entry == 1)
       userChoseBackpackElement = true;
   }
+
+  return true;
 }
 
 int Backpack::Size()

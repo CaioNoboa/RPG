@@ -42,7 +42,7 @@ public:
   ~Backpack();
   bool Empty();
   bool Push(Element element);
-  void Pop(Element &element);
+  bool Pop(Element &element);
   int Size();
   void Clear();
   void Top(Element &element, bool print);
@@ -67,7 +67,7 @@ public:
   bool Full(Element element);
   bool Empty();
   bool Insert(Element element);
-  void Delete(Element &element);
+  bool Delete(Element &element);
   bool Replace(Element element);
   int Size();
   int Weight();
@@ -105,7 +105,7 @@ class Character
 public:
   Character();
   void SetName(std::string newName);
-  void GetName(std::string &characterName);
+  std::string GetName();
   void GetNewElement(EnumDifficultyLevel difficultyLevel);
   void StoreElement(Element element);
   bool UseElement(Element &element);

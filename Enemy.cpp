@@ -40,7 +40,11 @@ void Enemy::EnemyGotAttacked(Element element)
   healthPoints -= element.power;
 
   if (!IsEnemyAlive())
+  {
+    std::cout << "-------------------" << std::endl;
     std::cout << "Muito bem, voce venceu o inimigo " << name << '!' << std::endl;
+    std::cout << "-------------------" << std::endl;
+  }
 }
 
 int Enemy::GetEnemyPower()

@@ -16,9 +16,9 @@ void Character::SetName(std::string newName)
   name = newName;
 }
 
-void Character::GetName(std::string &characterName)
+std::string Character::GetName()
 {
-  characterName = name;
+  return name;
 }
 
 void Character::GetNewElement(EnumDifficultyLevel difficultyLevel)
@@ -112,12 +112,10 @@ bool Character::UseElement(Element &element)
       backpack.Top(topBackpackElement, true);
       break;
     case 3:
-      belt.Delete(element);
-      userChoseElement = true;
+      userChoseElement = belt.Delete(element);
       break;
     case 4:
-      backpack.Pop(element);
-      userChoseElement = true;
+      userChoseElement = backpack.Pop(element);
       break;
     default:
       return false;
@@ -133,6 +131,9 @@ bool Character::UseElement(Element &element)
       healthPoints = MaxHealthPoints;
     else
       healthPoints = newHealthPoints;
+
+    std::cout << "-------------------" << std::endl;
+    std::cout << "Voce utilizou uma pocao de cura! Seus pontos de vida agora sao " << healthPoints << '!' << std::endl;
   }
 
   return true;
@@ -154,8 +155,10 @@ void Character::PrintHeroInformations()
 
 void Character::OurHeroGotAttacked(Enemy enemy)
 {
-  std::cout << "Voce foi atacado!" << std::endl;
-  healthPoints -= enemy.GetEnemyPower();
+  int enemyPower = enemy.GetEnemyPower();
+  std::cout << "-------------------" << std::endl;
+  std::cout << "Voce foi atacado e perdeu " << enemyPower << " pontos de vida!" << std::endl;
+  healthPoints -= enemyPower;
 }
 
 void Character::PrintBasicInformations()
@@ -169,8 +172,8 @@ void Character::PrintBasicInformations()
     topBackpackElementName = element.GetElementName();
   }
   std::cout << "-------------------" << std::endl;
-  std::cout << "Conteudo total do cinto: " << belt.Size() << ". Peso: " << belt.Weight() << '/' << MaxBeltWeight << '.' << std::endl;
-  std::cout << "Elemento do topo da mochila: " << topBackpackElementName << '.' << std::endl;
+  std::cout << "Conteudo total do cinto: " << belt.Size() << '/' << MaxBeltItems << ". Peso: " << belt.Weight() << '/' << MaxBeltWeight << '.' << std::endl;
+  std::cout << "Elemento do topo da mochila: " << topBackpackElementName << ". Conteudo total: " << backpack.Size() << '.' << std::endl;
   std::cout << "Pontos de vida de " << name << ": " << healthPoints << '.' << std::endl;
   std::cout << "-------------------" << std::endl;
 }

@@ -30,7 +30,7 @@ void Game::Start()
   for (int i = 1; i <= numberOfInitialLevels; i++)
   {
     PauseAndCleanConsole();
-    std::cout << "Fase I " << i << '!' << std::endl;
+    std::cout << "Fase " << i << '!' << std::endl;
     character.PrintBasicInformations();
     PlayInitialLevel();
     levelCounter++;
@@ -39,7 +39,7 @@ void Game::Start()
   for (int i = 1; i <= numberOfMiddleLevels; i++)
   {
     PauseAndCleanConsole();
-    std::cout << "Fase M " << (i + numberOfInitialLevels) << '!' << std::endl;
+    std::cout << "Fase " << (i + numberOfInitialLevels) << '!' << std::endl;
     character.PrintBasicInformations();
     PlayMiddleLevel();
     levelCounter++;
@@ -48,7 +48,7 @@ void Game::Start()
   for (int i = 1; i <= numberOfFinalLevels; i++)
   {
     PauseAndCleanConsole();
-    std::cout << "Fase F " << (i + numberOfInitialLevels + numberOfMiddleLevels) << '!' << std::endl;
+    std::cout << "Fase " << (i + numberOfInitialLevels + numberOfMiddleLevels) << '!' << std::endl;
     character.PrintBasicInformations();
     PlayFinalLevel();
     levelCounter++;
@@ -175,12 +175,16 @@ void Game::MainCharacterTurn(Enemy &enemy)
 
 void Game::EnemyTurn(Enemy enemy)
 {
+  std::cout << "-------------------" << std::endl;
+  std::cout << "Agora e o turno do inimigo..." << std::endl;
+  system("pause");
   character.OurHeroGotAttacked(enemy);
 
   if (!character.IsOurHeroAlive())
   {
     RegisterScore();
-    std::cout << "Opa, voce nao sobreviveu ao desafio..." << std::endl;
+    std::cout << "-------------------" << std::endl;
+    std::cout << "Voce nao sobreviveu ao desafio..." << std::endl;
     std::cout << "Boa sorte da proxima vez!" << std::endl;
     std::cout << "GAME OVER" << std::endl;
     abort();
@@ -198,7 +202,7 @@ void Game::EmptySQM()
   std::cout << "-------------------" << std::endl;
   std::cout << "Escolha o que gostaria de fazer:" << std::endl;
   std::cout << "Digite 1 para verificar e usar seus itens;" << std::endl;
-  std::cout << "Digite 2 para nao fazer nada;" << std::endl;
+  std::cout << "Digite 2 para nao fazer nada." << std::endl;
   std::cin >> entry;
 
   if (entry == 1)
@@ -218,13 +222,14 @@ void Game::RegisterScore()
     exit(-1);
   }
 
-  archive << "Jogador " << playerName << ", na data " << std::put_time(currentData, "%d/%m/%Y") << ", alcançou nivel " << levelCounter << ", do total de " << totalLevels << std::endl;
+  archive << "Jogador " << playerName << ", com o heroi " << character.GetName() << ", na data " << std::put_time(currentData, "%d/%m/%Y") << ", alcançou nivel " << levelCounter << ", do total de " << totalLevels << '.' << std::endl;
   archive.close();
 }
 
 void Game::PauseAndCleanConsole()
 {
-  std::cout << "Aperte 'enter' para iniciar a proxima fase!" << std::endl;
+  std::cout << "-------------------" << std::endl;
+  std::cout << "Pronto para iniciar a proxima fase?!" << std::endl;
   system("pause");
   system("cls");
 }

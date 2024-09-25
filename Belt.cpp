@@ -31,7 +31,7 @@ bool Belt::Insert(Element element)
   if (Full(element))
   {
     int entry;
-    std::cout << "O cinto está cheio e não possui espaço para o novo elemento!" << std::endl;
+    std::cout << "O cinto esta cheio e nao possui espaco para o novo elemento!" << std::endl;
     std::cout << "Digite 1 para verificar seu cinto e substituir um item pelo novo elemento;" << std::endl;
     std::cout << "Digite 2 para retornar." << std::endl;
     std::cin >> entry;
@@ -59,20 +59,19 @@ bool Belt::Insert(Element element)
   return true;
 }
 
-void Belt::Delete(Element &element)
+bool Belt::Delete(Element &element)
 {
-  int position = GetElementPosition(false);
-
   if (Empty())
   {
     std::cout << "Cinto vazio!" << std::endl;
-    return;
+    return false;
   }
 
+  int position = GetElementPosition(false);
   if (position < 1 || position > count)
   {
     std::cout << "Posição inválida" << std::endl;
-    return;
+    return false;
   }
 
   element = BeltElements[position];
@@ -83,6 +82,8 @@ void Belt::Delete(Element &element)
   {
     BeltElements[i] = BeltElements[i + 1];
   }
+
+  return true;
 }
 
 bool Belt::Replace(Element element)
@@ -126,7 +127,7 @@ void Belt::ListBeltElements()
   std::cout << "------ CINTO ------" << std::endl;
   for (int i = 1; i <= count; i++)
   {
-    std::cout << "Nome elemento da posicao " << i << ':' << std::endl;
+    std::cout << "Elemento da posicao " << i << ':' << std::endl;
     BeltElements[i].PrintElement();
     std::cout << "-------------------" << std::endl;
   }
@@ -157,6 +158,7 @@ int Belt::GetInsertPosition()
 
   while (entry < 1 || entry > (count + 1))
   {
+    std::cout << "-------------------" << std::endl;
     std::cout << "Informe a posicao do cinto ao qual deseja adicionar o novo elemento. Posicoes disponiveis: " << std::endl;
 
     for (int i = 1; i <= (count + 1); i++)
