@@ -17,6 +17,6 @@
       - Ao finalizar o jogo, ganhando ou perdendo, será adicioando um registro em `high_scores.txt`.
 
   ## Inicialização
-    No prompt de comando, na pasta que contém os arquivos rode:
+    Em sistema operacional Windows, no prompt de comando, na pasta que contém os arquivos rode:
       `g++ driver.cpp Backpack.cpp Belt.cpp Character.cpp Element.cpp Game.cpp Enemy.cpp -o jogoRPG.exe`
       `./jogoRPG.exe`

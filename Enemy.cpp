@@ -60,18 +60,18 @@ Enemy Enemy::SortEnemy(EnumDifficultyLevel difficultyLevel, bool boss)
   bool hardMode = (difficultyLevel == EnumDifficultyLevel::HIGH);
 
   if (boss)
-    return Enemy("Boss", 200, hardMode ? 30 : 20);
+    return Enemy("Balrog", 200, hardMode ? 30 : 20);
 
   Enemy enemiesList[9] = {
-      Enemy("Inimigo basico 1", hardMode ? 15 : 10, hardMode ? 10 : 5),
-      Enemy("Inimigo basico 2", hardMode ? 20 : 15, hardMode ? 10 : 5),
-      Enemy("Inimigo basico 3", hardMode ? 25 : 20, hardMode ? 10 : 5),
-      Enemy("Inimigo intermediario 1", hardMode ? 30 : 25, hardMode ? 15 : 10),
-      Enemy("Inimigo intermediario 2", hardMode ? 35 : 30, hardMode ? 15 : 10),
-      Enemy("Inimigo intermediario 3", hardMode ? 40 : 35, hardMode ? 15 : 10),
-      Enemy("Inimigo complexo 1", hardMode ? 45 : 40, hardMode ? 20 : 15),
-      Enemy("Inimigo complexo 2", hardMode ? 50 : 50, hardMode ? 20 : 15),
-      Enemy("Inimigo complexo 3", hardMode ? 70 : 60, hardMode ? 20 : 15),
+      Enemy("Guerreiro Goblin", hardMode ? 15 : 10, hardMode ? 10 : 5),
+      Enemy("Ladrao da Floresta", hardMode ? 20 : 15, hardMode ? 10 : 5),
+      Enemy("Soldado Desgarrado", hardMode ? 25 : 20, hardMode ? 10 : 5),
+      Enemy("Capitao Orc", hardMode ? 30 : 25, hardMode ? 15 : 10),
+      Enemy("Mago Sombrio", hardMode ? 35 : 30, hardMode ? 15 : 10),
+      Enemy("Assassino das Sombras", hardMode ? 40 : 35, hardMode ? 15 : 10),
+      Enemy("Senhor dos Mortos", hardMode ? 45 : 40, hardMode ? 20 : 15),
+      Enemy("Guardiao do Abismo", hardMode ? 50 : 50, hardMode ? 20 : 15),
+      Enemy("Lorde da Destruicao", hardMode ? 70 : 60, hardMode ? 20 : 15),
   };
 
   srand(time(0));
