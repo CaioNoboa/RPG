@@ -15,7 +15,7 @@ Game::Game()
 {
   playerName = "";
   levelCounter = 0;
-  numberOfInitialLevels = 7;
+  numberOfInitialLevels = 8;
   numberOfMiddleLevels = 3;
   numberOfFinalLevels = 3;
   totalLevels = numberOfInitialLevels + numberOfMiddleLevels + numberOfFinalLevels + 1;
